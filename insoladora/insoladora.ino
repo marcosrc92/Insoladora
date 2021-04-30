@@ -48,9 +48,10 @@
 const int rs = 2, en = 3, d4 = 4, d5 = 5, d6 = 6, d7 = 7;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
-const int Start_Stop = 9;
+const int Start_Stop = 8;
 const int botonMENOS =  10;
 const int botonMAS =  11;
+const int LEDUV = 13;
 
 bool valSS = 1;
 bool valSS_ant = 1;
@@ -74,6 +75,7 @@ void setup() {
   pinMode(Start_Stop, INPUT);
   pinMode(botonMAS, INPUT);
   pinMode(botonMENOS, INPUT);
+  pinMode(LEDUV, OUTPUT);
 
   cli();//stop interrupts
   
@@ -101,7 +103,11 @@ void setup() {
 ISR(TIMER1_COMPA_vect){//timer1 interrupt 1Hz 
   if(estado){ 
       contador--;
-      if(contador==0) estado =0;
+      digitalWrite(LEDUV, HIGH);
+      if(contador==0){
+        digitalWrite(LEDUV, LOW);
+        estado =0;
+      }
   }
 }
 
@@ -161,4 +167,3 @@ void loop() {
   lcd.setCursor(8, 1);
   lcd.print(estado);
 }
-
