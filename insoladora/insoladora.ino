@@ -116,6 +116,7 @@ void loop() {
   valSS = digitalRead(Start_Stop);
   if(!valSS){
     if(valSS_ant){
+      delay(5000);
       valSS_ant=valSS;
       estado=(!estado);
     }
@@ -126,7 +127,7 @@ void loop() {
   if(!valMAS){
     if(valMAS_ant){
       valMAS_ant=valMAS;
-      contador+=10;
+      contador+=5;
     }
   }
   valMAS_ant=valMAS;
@@ -135,7 +136,7 @@ void loop() {
   if(!valMENOS){
     if(valMENOS_ant){
       valMENOS_ant=valMENOS;
-      contador-=10;
+      contador-=5;
       if(contador<=0) contador=0;
     }
   }
